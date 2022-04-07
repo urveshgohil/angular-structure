@@ -1,0 +1,37 @@
+@import 'mixin';
+$theme_color: #FF4E4E;
+$white: #ffffff;
+$black: #000000;
+
+// Text Color
+$color1:#14191F;
+$color2:#626262;
+$color3:#c1c1c1;
+
+$success: #089B55;
+$danger: #E5664B;
+$warning: #E5B64B;
+$info: #448FB8;
+
+// media quary
+$lg: 1199px;
+$md: 991px;
+$sm: 767px;
+$xs: 575px;
+
+$font_size: 16;
+
+%Avenir {
+    font-family: 'Avenir'
+}
+%Avenir-Heavy {
+    font-family: 'Avenir-Heavy'
+}
+
+%felx-wrap {
+    display:-ms-flexbox;display:-webkit-box;display:flex;
+    -ms-flex-wrap:wrap;-webkit-flex-wrap:wrap;flex-wrap:wrap;
+}
+%transition {
+    @include prefix(transition, all 0.3s ease-in-out);
+}

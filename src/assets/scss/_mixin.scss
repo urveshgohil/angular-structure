@@ -1,0 +1,73 @@
+/*--- Webkit ---*/
+@mixin prefix($property, $parameters) {
+    @each $prefix in -o-, -moz-, -ms-, -webkit-, "" {
+        #{$prefix}#{$property}: $parameters;
+    }
+}
+/*--- Media Query ---*/
+@mixin responsive($media) {
+    @if $media == lg {
+        @media only screen and (max-width: $lg) { @content; }
+    }
+    @else if $media == md {
+        @media only screen and (max-width: $md) { @content; }
+    }
+    @else if $media == sm {
+        @media only screen and (max-width: $sm) { @content; }
+    }
+    @else if $media == xs {
+        @media only screen and (max-width: $xs) { @content; }
+    }
+}
+@mixin linear-gradient($degrees,$color-one,$color-two,$color-two-percent) {
+    background: $color-one;
+    background: -moz-linear-gradient($degrees, $color-one 0%, $color-two $color-two-percent);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, $color-one), color-stop($color-two-percent, $color-two));
+    background: -webkit-linear-gradient($degrees, $color-one 0%, $color-two $color-two-percent);
+    background: -o-linear-gradient($degrees, $color-one 0%, $color-two $color-two-percent);
+    background: -ms-linear-gradient($degrees, $color-one 0%, $color-two $color-two-percent);
+    background: linear-gradient($degrees, $color-one 0%, $color-two $color-two-percent);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color-one', endColorstr='$color-two',GradientType=1 );
+}
+// rem
+@function rem($target, $context: $font_size) {
+    @return ($target / $context) * 1rem;
+}
+// Color List Tooltip
+@mixin tooltipColor($className, $colorName, $colorOpacityOne, $colorOpacityTwo) {
+    #{$className} {
+        background-color: rgba($colorName, $colorOpacityOne);
+        &.tooltip-dot {
+            background-color: $colorName;
+            &::before {
+                background-color: rgba($colorName, $colorOpacityTwo);
+            }
+        }
+    }
+}
+// Column Space
+@mixin colSpace($space) {
+    @if $space == 12 {
+        .row {@extend %felx-wrap; margin-right: rem(-$space); margin-left: rem(-$space);}
+        [class^="col-"], [class^="column-"] {padding-right: rem($space);padding-left: rem($space);}
+        .row.space-#{$space * 2} {margin-top: rem(-$space); margin-bottom: rem(-$space)}
+        .row.space-#{$space * 2} [class^="col-"], .row.space-#{$space * 2} [class^="column-"] {padding-top: rem($space); padding-bottom: rem($space);}
+        @include responsive(sm) {
+            .row.space-#{$space * 2} {margin-top: rem(-$space / 1.5); margin-bottom: rem(-$space / 1.5)}
+            .row.space-#{$space * 2} [class^="col-"], .row.space-#{$space * 2} [class^="column-"] {padding-top: rem($space / 1.5); padding-bottom: rem($space / 1.5);}
+        }
+    } @else {
+        .row.space-#{$space * 2} {@extend %felx-wrap; margin-right: rem(-$space); margin-left: rem(-$space); margin-top: rem(-$space); margin-bottom: rem(-$space)}
+        .row.space-#{$space * 2} [class^="col-"],.row.space-#{$space * 2} [class^="column-"] {padding-top: rem($space); padding-right: rem($space);padding-left: rem($space); padding-bottom: rem($space);}
+        @include responsive(sm) {
+            .row.space-#{$space * 2} {margin-top: rem(-$space / 1.5); margin-bottom: rem(-$space / 1.5)}
+            .row.space-#{$space * 2} [class^="col-"], .row.space-#{$space * 2} [class^="column-"] {padding-top: rem($space / 1.5); padding-bottom: rem($space / 1.5);}
+        }
+    }
+}
+// Circle
+@mixin circle($circle: $boolean) {
+    @if $circle {
+        @include prefix(border-radius, 50%);
+    }
+}

@@ -1,0 +1,5 @@
+<header class="app-header" [ngClass]="{'sticky': isStickyClsAdd}" (scroll)="onWindowScroll();"></header>
+<main class="main-body flex-1">
+    <router-outlet  class="d-flex flex-wrap"></router-outlet>
+</main>
+<footer class="app-footer d-flex flex-column"></footer>
